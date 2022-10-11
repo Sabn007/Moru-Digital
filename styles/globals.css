@@ -24,3 +24,16 @@ a {
     background: black;
   }
 }
+
+.image{
+  height: 200px;
+  width: 200px;
+  background-color: gray;
+}
+li{
+  list-style: none;
+}
+
+.border__line{
+  border-right: 1px solid black;
+}
