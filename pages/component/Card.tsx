@@ -29,11 +29,10 @@ const Card = ({ userData,add }: any) => {
   const editUser = (id:Number) => {
     axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
     .then((res:any) => {
-      const persons = res.data;
-      setEditData({ persons });
+      const editPersons = res.data;
+      setEditData({ editPersons });
     })
   }
-
  
   const openNotificationWithIcon = (type: NotificationType) => {
     notification[type]({
@@ -110,16 +109,16 @@ const Card = ({ userData,add }: any) => {
         >
         
           <Form.Item label="Name">
-            <Input placeholder="input placeholder" />
+            <Input placeholder="input placeholder" value={editData?.editPersons?.name} />
           </Form.Item>
           <Form.Item label="Email">
-            <Input placeholder="input placeholder" />
+            <Input placeholder="input placeholder" value={editData?.editPersons?.email} />
           </Form.Item>
           <Form.Item label="Phone">
-            <Input placeholder="input placeholder" />
+            <Input placeholder="input placeholder" value={editData?.editPersons?.phone} />
           </Form.Item>
           <Form.Item label="Website">
-            <Input placeholder="input placeholder" />
+            <Input placeholder="input placeholder" value={editData?.editPersons?.website} />
           </Form.Item>
        
         </Form>
