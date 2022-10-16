@@ -1,26 +1,22 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import dummy from "../../styles/image/dummy.png";
+
 import {
-  AiOutlineHeart,
-  AiOutlineEdit,
-  AiTwotoneDelete,
-  AiOutlineMail,
-  AiOutlinePhone,
-} from "react-icons/ai";
-import {
+  NumberOutlined,
   HeartOutlined,
   EditOutlined,
   DeleteOutlined,
   MailOutlined,
   PhoneOutlined ,
 } from '@ant-design/icons';
-import { Button, Form, Input, Radio, Modal } from "antd";
+import { Button, Form, Input, Radio, Modal, notification } from "antd";
 import axios from "axios";
 
 type LayoutType = Parameters<typeof Form>[0]["layout"];
+type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
-const Card = ({ userData }: any) => {
+const Card = ({ userData,add }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editData, setEditData] = useState<any>('false');
   const [form] = Form.useForm();
@@ -39,7 +35,11 @@ const Card = ({ userData }: any) => {
   }
 
  
- 
+  const openNotificationWithIcon = (type: NotificationType) => {
+    notification[type]({
+      message: 'User Added to Fav',
+    });
+  }
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -62,23 +62,24 @@ const Card = ({ userData }: any) => {
             </div>
             <div className="mt-3">
               <ul>
-                <li className="mx-2">
-                <MailOutlined />
+                <li>
+                <MailOutlined  className="mx-2" />
                   {items?.email}
                 </li>
-                <li className="mx-2">
-                <PhoneOutlined />
+                <li >
+                <PhoneOutlined  className="mx-2" />
                   {items?.phone}
                 </li>
-                <li className="mx-2">
-                  <AiOutlinePhone />
+                <li >
+                  <NumberOutlined  className="mx-2" />
                   {items?.website}
                 </li>
               </ul>
             </div>
             <div className="d-flex justify-content-between px-5 py-2">
-              <div className="border__line" style={{ paddingRight: "70px" }}>
-              <HeartOutlined color="red" />
+              <div className="border__line" style={{ paddingRight: "70px" }} onClick={()=>{add(items?.id);
+              openNotificationWithIcon('success')}}>
+              <HeartOutlined style={{color:'red'}} />
               </div>
               <div
                 className="border__line"
